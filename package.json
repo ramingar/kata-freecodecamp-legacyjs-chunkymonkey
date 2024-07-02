@@ -4,8 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "babel-tape-runner ./tests/*.test.js | tap-spec-emoji",
+    "coverage": "nyc npm test && nyc report --report-dir ./.nyc_output --tempdir .nyc_output --reporter=text-lcov > ./.nyc_output/coverage.data",
+    "code_quality": "npm run -s coverage && ./sonarqube-scanner-launcher.sh"
   },
   "author": "Rafael Minguet García",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/preset-env": "^7.24.5",
+    "babel-tape-runner": "^3.0.0",
+    "nyc": "^15.1.0",
+    "tap-spec-emoji": "^6.1.2",
+    "tape": "^4.10.1"
+  }
 }
